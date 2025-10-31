@@ -8,6 +8,7 @@ export const addExerciseValidation = [
     body('description').isLength({ max: 100 }).withMessage('Description should be not longer than 100 characters!'),
     body('duration').isNumeric().withMessage('Invalid duration!'),
     body('date').custom((value) => {
+        if (!value) return true
         if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
             throw new Error('Date must be in YYYY-MM-DD format');
         }
